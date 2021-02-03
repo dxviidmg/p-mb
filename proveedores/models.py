@@ -1,8 +1,7 @@
 from django.db import models
+from core.models import *
 
-class Proveedor(models.Model):
-    nombre = models.CharField(max_length=30)
-    domicilio = models.TextField()
-
+class Proveedor(Tiempo, Entidad):
+    
     def __str__(self):
         return self.nombre
