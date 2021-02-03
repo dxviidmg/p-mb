@@ -8,6 +8,10 @@ class Articulo(Tiempo):
     precio = models.DecimalField(max_digits=20, decimal_places=2, default=0)
     proveedores = models.ManyToManyField(Proveedor)
 
+    def __str__(self):
+        return self.codigo + " " + self.descripcion
+        
+
 #class ProveedorArticulo(Tiempo):
 #    proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
 #    articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)
