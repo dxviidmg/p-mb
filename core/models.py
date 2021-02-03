@@ -1,8 +1,8 @@
 from django.db import models
 
 class Tiempo(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True, null=True)
-    updated_at = models.DateTimeField(auto_now=True, null=True)
+    creado = models.DateTimeField(auto_now_add=True, null=True)
+    actualizado = models.DateTimeField(auto_now=True, null=True)
 
     class Meta:
         abstract = True
