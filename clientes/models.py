@@ -6,7 +6,7 @@ class Cliente(Tiempo, Entidad):
 
     codigo = models.CharField(max_length=30)
     tipo = models.IntegerField(default=1, choices = tipo_choices)
-    fotografia = models.ImageField(upload_to='fotografias')
+    fotografia = models.ImageField(upload_to ='fotografias/%Y/%m/%d/', null=True, blank=True)
     
     def __str__(self):
         return self.nombre
