@@ -22,11 +22,13 @@ from django.conf.urls.static import static
 
 from rest_framework import routers
 
+from proveedores import views as proveedores_views
 from articulos import views as articulos_views
 from clientes import views as clientes_views
 from pedidos import views as pedidos_views
 
 router = routers.DefaultRouter()
+router.register(r'proveedores', proveedores_views.ProveedorViewSet)
 router.register(r'articulos', articulos_views.ArticuloViewSet)
 router.register(r'clientes', clientes_views.ClienteViewSet)
 router.register(r'pedidos', pedidos_views.PedidoViewSet)
