@@ -21,10 +21,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from rest_framework import routers
-from pedidos import views
+from clientes import views as clientes_views
+from pedidos import views as pedidos_views
 
 router = routers.DefaultRouter()
-router.register(r'pedidos', views.PedidoViewSet)
+router.register(r'clientes', clientes_views.ClienteViewSet)
+router.register(r'pedidos', pedidos_views.PedidoViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
