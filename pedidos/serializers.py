@@ -6,7 +6,6 @@ class PedidoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pedido
         fields = ("articulo", "cliente", "surtido", "es_urgente", "destino", "cantidad", "almacen", "referencia", "codigo_sucursal", "codigo_socio", "detalle")
-        extra_kwargs = {'id': {'write_only': True}}
 
     def create(self, validated_data):
         data = self.context['request'].data
