@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'proveedores',
     'articulos',
     'clientes',
-    'pedidos'
+    'pedidos',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,6 @@ import os
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEIDA_URL = '/media/'
+
+STATIC_ROOT = 'static'
+STATICFILES_DIRS = (os.path.join(BASE_DIR,'staticfiles'),)
