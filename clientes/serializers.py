@@ -5,4 +5,4 @@ class ClienteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Cliente
-        fields = ("codigo", "tipo", "fotografia")
+        fields = ("nombre", "codigo", "domicilio", "tipo", "fotografia")
