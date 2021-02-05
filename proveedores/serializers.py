@@ -1,10 +1,12 @@
 from rest_framework import serializers
 from .models import Proveedor
+from articulos.serializers import ArticuloSerializer
 
-class ProveedorSerializer(serializers.ModelSerializer):
+class ProveedorSerializer(serializers.HyperlinkedModelSerializer):
 
-    articulo_proveedor = serializers.StringRelatedField(many=True, read_only = True)
-
+    articulo_proveedor = ArticuloSerializer(many=True, read_only = True)
+    print(articulo_proveedor.data)
+    
     class Meta:
         model = Proveedor
-        fields = ("id", "nombre", "domicilio", "articulo_proveedor")
+        fields = ("url", "nombre", "domicilio", "articulo_proveedor")
