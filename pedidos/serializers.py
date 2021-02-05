@@ -1,11 +1,11 @@
 from rest_framework import serializers
 from .models import Pedido
 
-class PedidoSerializer(serializers.ModelSerializer):
+class PedidoSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Pedido
-        fields = ("id", "articulo", "cliente", "surtido", "es_urgente", "destino", "cantidad", "almacen", "referencia", "codigo_sucursal", "codigo_socio", "detalle")
+        fields = ("url", "articulo", "cliente", "surtido", "es_urgente", "destino", "cantidad", "almacen", "referencia", "codigo_sucursal", "codigo_socio", "detalle")
 
     def create(self, validated_data):
         data = self.context['request'].data
