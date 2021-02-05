@@ -3,9 +3,7 @@ from .models import Proveedor
 from articulos.serializers import ArticuloSerializer
 
 class ProveedorSerializer(serializers.HyperlinkedModelSerializer):
-
     articulo_proveedor = ArticuloSerializer(many=True, read_only = True)
-    print(articulo_proveedor.data)
     
     class Meta:
         model = Proveedor
