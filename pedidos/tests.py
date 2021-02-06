@@ -30,3 +30,13 @@ class PedidoAPITest(TestCase):
             format='json'
         )
         self.assertEquals(response.status_code, 200)
+
+class DashboardAPITest(TestCase):
+    def test_consulta(self):
+
+        client = APIClient()
+        response = client.get(
+                '/dashboard/', {},
+            format='json'
+        )
+        self.assertEquals(response.status_code, 200)
