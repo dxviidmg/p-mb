@@ -2,6 +2,7 @@ from django.test import TestCase
 from .models import Pedido
 from articulos.models import Articulo
 from pedidos.models import Cliente
+from rest_framework.test import APIClient
 
 class PedidoModelTest(TestCase):
     def test_create(self):
@@ -19,3 +20,13 @@ class PedidoModelTest(TestCase):
         pedido = Pedido.objects.create(**data)
 
         self.assertEquals(pedido.cantidad, 2)
+
+class PedidoAPITest(TestCase):
+    def test_consulta(self):
+
+        client = APIClient()
+        response = client.get(
+                '/pedidos/', {},
+            format='json'
+        )
+        self.assertEquals(response.status_code, 200)
