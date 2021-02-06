@@ -1,3 +1,7 @@
 from django.test import TestCase
+from .models import Proveedor
 
-# Create your tests here.
+class ProveedorModelTest(TestCase):
+    def test_create(self):
+        articulo = Proveedor.objects.create(nombre="test", domicilio = "test")
+        self.assertEquals(articulo.nombre, "test")
