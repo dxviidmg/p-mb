@@ -8,15 +8,15 @@ Este repositorio tiene un api de pedidos
 
 * Python 3.8+
 * PostgreSQL 9.4+
-* virtualenvwrapper
+* Virtualenvwrapper
 * requirements.txt
 
 ### PostgreSQL
 Para instalar PostgreSQL consulta https://www.postgresql.org/docs/9.5/static/installation.html
 
-### virtualenvwrapper
+### Virtualenvwrapper
 
-Para instalar virtualenvwrapper consulta https://virtualenvwrapper.readthedocs.io/en/latest/
+Para instalar virtualenvwrapper consulta https://virtualenvwrapper.readthedocs.io/en/latest/, ejecute
 
 ```shell
 sudo pip3 install virtualenvwrapper
@@ -57,7 +57,7 @@ pip install -r requirements.txt
 
 ----
 
-## Set Up
+## Configuración
 
 En la raíz del proyecto, ejecute
 ```shell
@@ -71,13 +71,13 @@ python manage.py migrate
 
 ----
 
-## Running
+## Correr servidor
 
 Dentro de su entorno virtual, usando su configuración y en la carpeta raíz, ejecute
 ```shell
 python manage.py runserver
 ```
-Y el servidor estará activo. Para ingresar a la interfaz de Django REST Framework, en su navegador web ingrese
+Y el servidor estará activo, para ingresar a la interfaz de Django REST Framework, en su navegador web ingrese a
 ```
 http://localhost:8000
 ```
