@@ -1,5 +1,5 @@
 from django.db import models
-#from core.models import *
+from .validators import validacion_alfanumerica
 
 class Tiempo(models.Model):
     creado = models.DateTimeField(auto_now_add=True, null=True)
@@ -10,8 +10,8 @@ class Tiempo(models.Model):
         
 
 class Entidad(models.Model):
-    nombre = models.CharField(max_length=30)
-    domicilio = models.TextField()
+    nombre = models.CharField(max_length=30, validators=[validacion_alfanumerica])
+    domicilio = models.TextField(validators=[validacion_alfanumerica])
 
     class Meta:
         abstract = True
