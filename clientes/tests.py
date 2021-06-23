@@ -3,7 +3,7 @@ from .models import Cliente
 from rest_framework.test import APIClient
 
 class ClienteModelTest(TestCase):
-    def test_create(self):
+    def testrea_cte(self):
         cliente = Cliente.objects.create(codigo = 1, domicilio = "cdmx", nombre= "Ramon", tipo = 4)
         self.assertEquals(cliente.codigo, 1)
 

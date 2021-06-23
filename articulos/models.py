@@ -1,6 +1,5 @@
 from django.db import models
-from proveedores.models import Proveedor
-from core.models import *
+from proveedores.models import Tiempo, Proveedor
 
 class Articulo(Tiempo):
     codigo = models.CharField(max_length=30, unique=True)

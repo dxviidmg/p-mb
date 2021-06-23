@@ -1,5 +1,5 @@
 from django.db import models
-from core.models import *
+from proveedores.models import Tiempo
 from articulos.models import *
 from clientes.models import *
 
