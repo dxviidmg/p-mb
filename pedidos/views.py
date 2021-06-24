@@ -5,8 +5,7 @@ from .serializers import PedidoSerializer, DestinoSerializer
 from rest_framework.response import Response
 from clientes.models import Cliente
 from django.db.models import Count
-#from rest_framework import serializers
-#from rest_framework import generics, status
+
 
 class DestinoViewSet(viewsets.ModelViewSet):
     queryset = Destino.objects.all()
@@ -41,6 +40,8 @@ class DestinoViewSet(viewsets.ModelViewSet):
 
         serializer = DestinoSerializer(data=request.data, context={'request': request})
 
+        import pdb; pdb.set_trace()
+        
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

@@ -9,10 +9,10 @@ class Destino(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     tipo = models.IntegerField(choices = tipo_choices)    
     #Destino Centro de distribución
-    almacen = models.CharField(max_length=30, null=True, blank=True, validators=[validacion_alfanumerica])
+    almacen = models.CharField(max_length=30, null=True, blank=True)
 
     #Destino Sucursal o Empresa asociada
-    referencia = models.CharField(max_length=30, null=True, blank=True, validators=[validacion_alfanumerica])    
+    referencia = models.CharField(max_length=30, null=True, blank=True)    
 
     #Destino Sucursal
     codigo_sucursal = models.IntegerField(null=True, blank=True)
