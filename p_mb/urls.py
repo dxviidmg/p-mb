@@ -21,6 +21,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from rest_framework import routers
+from rest_framework_swagger.views import get_swagger_view
+
 
 from proveedores import views as proveedores_views
 from articulos import views as articulos_views
@@ -35,10 +37,13 @@ router.register(r'destinos', pedidos_views.DestinoViewSet, basename='destino')
 router.register(r'pedidos', pedidos_views.PedidoViewSet, basename='pedido')
 router.register(r'dashboard', pedidos_views.DashboardViewSet, basename="dashboard")
 
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
-    path('api/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api/', include('rest_framework.urls', namespace='rest_framework')),
+    path("swagger-docs", get_swagger_view(title='Documentación SWAGGER')),
 ]
 
 if settings.DEBUG:

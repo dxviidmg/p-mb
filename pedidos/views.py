@@ -4,7 +4,6 @@ from rest_framework import viewsets
 from .serializers import PedidoSerializer, DestinoSerializer
 from rest_framework.response import Response
 from clientes.models import Cliente
-#from core.utils import get_model_attributes
 from django.db.models import Count
 from rest_framework import serializers
 
