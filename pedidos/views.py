@@ -49,10 +49,20 @@ class PedidoViewSet(viewsets.ModelViewSet):
         data = self.request.data
         keys = list(data.keys())
 
-        if 'parametros_cliente' in keys and 'parametros_pedido' in keys:
+        if 'parametros_cliente' in keys:
             clientes = Cliente.objects.filter(**data['parametros_cliente'])
-            pedidos = Pedido.objects.filter(**data['parametros_pedido']).filter(cliente__in=clientes)
+        else:
+            clientes = Cliente.objects.all()
+
+        if 'parametros_destino' in keys:
+            destinos = Destino.objects.filter(**data['parametros_destino'])
+        else:
+            destinos = Destino.objects.all()
+
+        if 'parametros_pedido' in keys:
+            pedidos = Pedido.objects.filter(**data['parametros_pedido']).filter(cliente__in=clientes, destino__in=destinos)
             return pedidos
+
         return Pedido.objects.all()
 
 
