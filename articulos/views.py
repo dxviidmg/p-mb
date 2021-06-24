@@ -4,5 +4,5 @@ from rest_framework import viewsets
 from .serializers import ArticuloSerializer
 
 class ArticuloViewSet(viewsets.ModelViewSet):
-    queryset = Articulo.objects.all().order_by('id')
+    queryset = Articulo.objects.all()
     serializer_class = ArticuloSerializer

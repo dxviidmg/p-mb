@@ -5,8 +5,9 @@ from clientes.models import *
 from proveedores.validators import validacion_alfanumerica
 
 class Destino(models.Model):
+    tipo_choices = ((1, 'Centro de distribución'), (2, 'Sucursal'), (3, 'Empresa asociada'))
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    tipo = ((1, 'Centro de distribución'), (2, 'Sucursal'), (3, 'Empresa asociada'))
+    tipo = models.IntegerField(choices = tipo_choices)    
     #Destino Centro de distribución
     almacen = models.CharField(max_length=30, null=True, blank=True, validators=[validacion_alfanumerica])
 
@@ -20,8 +21,11 @@ class Destino(models.Model):
     codigo_socio = models.IntegerField(null=True, blank=True)
     detalle = models.CharField(max_length=30, null=True, blank=True)
 
+    def __str__(self):
+        return "Destino " + str(self.id) + ' de '  + self.cliente.__str__()
+
 class Pedido(Tiempo):
-    numero = models.IntegerField()
+    numero = models.IntegerField(unique=True)
     articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     destino = models.ForeignKey(Destino, on_delete=models.CASCADE)

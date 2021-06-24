@@ -1,14 +1,49 @@
 from django.shortcuts import render
-from .models import Pedido
+from .models import Destino, Pedido
 from rest_framework import viewsets
-from .serializers import PedidoSerializer
+from .serializers import PedidoSerializer, DestinoSerializer
 from rest_framework.response import Response
 from clientes.models import Cliente
 #from core.utils import get_model_attributes
 from django.db.models import Count
+from rest_framework import serializers
+
+
+class DestinoViewSet(viewsets.ModelViewSet):
+    queryset = Destino.objects.all()
+    serializer_class = DestinoSerializer
+
+    def create(self, request):
+        data = request.data
+        keys = data.keys()
+        tipo = int(data['tipo'])
+
+        if tipo == 1:
+            if data['almacen'] == '':
+                raise serializers.ValidationError("Incluir el almacen")
+            
+        elif tipo == 2:
+            if data['referencia'] == '':
+                raise serializers.ValidationError("Incluir el referencia")
+
+            if data['codigo_sucursal'] == '':
+                raise serializers.ValidationError("Incluir el codigo_sucursal")
+
+        elif tipo == 3:
+            if data['referencia'] == '':            
+                raise serializers.ValidationError("Incluir el referencia")
+            if data['codigo_socio'] == '':
+                raise serializers.ValidationError("Incluir el codigo_socio")
+            if data['detalle'] == '':
+                raise serializers.ValidationError("Incluir el detalle")
+
+        serializer = DestinoSerializer(data=request.data, context={'request': request})
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
 
 class PedidoViewSet(viewsets.ModelViewSet):
-#    queryset = Pedido.objects.all()
     serializer_class = PedidoSerializer
 
     def get_queryset(self):
@@ -20,6 +55,24 @@ class PedidoViewSet(viewsets.ModelViewSet):
             pedidos = Pedido.objects.filter(**data['parametros_pedido']).filter(cliente__in=clientes)
             return pedidos
         return Pedido.objects.all()
+
+
+    def create(self, request):
+        data = request.data
+        id_destino = data['destino'].split('/')[-2]
+        destino = Destino.objects.get(id=id_destino)
+        id_cliente = int(data['cliente'].split('/')[-2])
+
+        if destino.cliente.pk != id_cliente:
+            raise serializers.ValidationError("Domicilio no corresponde a cliente")
+
+        serializer = PedidoSerializer(data=request.data, context={'request': request})
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+            
+
 
 class DashboardViewSet(viewsets.ViewSet):
     def list(self, request, format=None):
