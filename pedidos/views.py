@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from .models import Destino, Pedido
-from rest_framework import viewsets
+from rest_framework import viewsets, serializers, status
 from .serializers import PedidoSerializer, DestinoSerializer
 from rest_framework.response import Response
 from clientes.models import Cliente
 from django.db.models import Count
-from rest_framework import serializers
-
+#from rest_framework import serializers
+#from rest_framework import generics, status
 
 class DestinoViewSet(viewsets.ModelViewSet):
     queryset = Destino.objects.all()
@@ -14,8 +14,11 @@ class DestinoViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         data = request.data
+        print(data)
         keys = data.keys()
         tipo = int(data['tipo'])
+
+#        import pdb; pdb.set_trace()
 
         if tipo == 1:
             if data['almacen'] == '':
@@ -41,6 +44,8 @@ class DestinoViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
+
+        return Response(data, status=status.HTTP_400_BAD_REQUEST)
 
 class PedidoViewSet(viewsets.ModelViewSet):
     serializer_class = PedidoSerializer
@@ -80,6 +85,8 @@ class PedidoViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
+
+        return Response(data, status=status.HTTP_400_BAD_REQUEST)
             
 
 

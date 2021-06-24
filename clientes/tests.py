@@ -16,3 +16,16 @@ class ClienteAPITest(TestCase):
             format='json'
         )
         self.assertEquals(response.status_code, 200)
+
+    def test_create(self):
+        payload={"codigo": 3, "domicilio": "cdmx", "nombre": "dav", "tipo": 4}
+        headers = {
+            'Content-Type': 'application/json'
+        }
+
+        client = APIClient()
+        response = client.post(
+                '/clientes/', payload,
+            format='json'
+        )
+        self.assertEquals(response.status_code, 201)

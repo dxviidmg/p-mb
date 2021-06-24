@@ -20,3 +20,19 @@ class ProveedorAPITest(TestCase):
             format='json'
         )
         self.assertEquals(response.status_code, 200)
+
+    def test_create(self):
+        payload = {
+            "nombre": "Fabrica",
+            "domicilio": "cmdx"
+            }
+        headers = {
+            'Content-Type': 'application/json'
+        }
+
+        client = APIClient()
+        response = client.post(
+                '/proveedores/', payload,
+            format='json'
+        )
+        self.assertEquals(response.status_code, 201)

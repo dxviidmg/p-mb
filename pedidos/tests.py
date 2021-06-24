@@ -13,10 +13,33 @@ class DestinoModelTest(TestCase):
             "tipo": 1,
             "almacen": "Mi almacen"
         }
-        pedido = Destino.objects.create(**data)
+        destino = Destino.objects.create(**data)
 
-        self.assertEquals(pedido.pk, 1)
+        self.assertEquals(destino.pk, 1)
 
+class DestinoAPITest(TestCase):
+    def test_consulta(self):
+
+        client = APIClient()
+        response = client.get(
+                '/destinos/', {},
+            format='json'
+        )
+        self.assertEquals(response.status_code, 200)
+
+    def test_create(self):
+        payload = {
+            "cliente": "http://127.0.0.1:8000/clientes/1/",
+            "tipo": 1,
+            "almacen": "test
+        }
+
+        client = APIClient()
+        response = client.post(
+                '/destinos/', payload,
+            format='json'
+        )
+        self.assertEquals(response.status_code, 201)
 
 class PedidoModelTest(TestCase):
     def test_create(self):
@@ -36,6 +59,7 @@ class PedidoModelTest(TestCase):
 
         self.assertEquals(pedido.cantidad, 2)
 
+"""
 class PedidoAPITest(TestCase):
     def test_consulta(self):
 
@@ -45,6 +69,27 @@ class PedidoAPITest(TestCase):
             format='json'
         )
         self.assertEquals(response.status_code, 200)
+
+    def test_create(self):
+        payload = {
+            "articulo": "http://127.0.0.1:8000/articulos/1/",
+            "cliente": "http://127.0.0.1:8000/clientes/1/",
+            "destino": "http://127.0.0.1:8000/destinos/1/",
+            "cantidad": 4,
+            "numero": 3,
+            "es_urgente": True,
+        }
+        headers = {
+            'Content-Type': 'application/json'
+        }
+
+        client = APIClient()
+        response = client.post(
+                '/pedidos/', payload,
+            format='json'
+        )
+        self.assertEquals(response.status_code, 201)
+"""
 
 class DashboardAPITest(TestCase):
     def test_consulta(self):
