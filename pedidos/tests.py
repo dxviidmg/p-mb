@@ -1,21 +1,36 @@
 from django.test import TestCase
-from .models import Pedido
+from .models import Pedido, Destino
 from articulos.models import Articulo
-from pedidos.models import Cliente
+from clientes.models import Cliente
 from rest_framework.test import APIClient
+
+class DestinoModelTest(TestCase):
+    def test_create(self):
+        cliente, articulo_created = Cliente.objects.get_or_create(codigo = 1, domicilio = "cdmx", nombre= "Ramon", tipo = 4)
+
+        data = {
+            "cliente": cliente,
+            "tipo": 1,
+            "almacen": "Mi almacen"
+        }
+        pedido = Destino.objects.create(**data)
+
+        self.assertEquals(pedido.pk, 1)
+
 
 class PedidoModelTest(TestCase):
     def test_create(self):
         articulo, articulo_created = Articulo.objects.get_or_create(codigo = 1, descripcion = "test", precio = 10)
         cliente, articulo_created = Cliente.objects.get_or_create(codigo = 1, domicilio = "cdmx", nombre= "Ramon", tipo = 4)
+        destino, destino_created = Destino.objects.get_or_create(cliente=cliente, tipo= 1, almacen="Mi almacen")
 
         data = {
+            "numero": 1,
             "articulo": articulo,
             "cliente": cliente,
             "es_urgente": True,
-            "destino": 1,
+            "destino": destino,
             "cantidad": 2,
-            "almacen": 1
         }
         pedido = Pedido.objects.create(**data)
 
